@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <title>Pong Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8LRi7Lzgq7shxujxxX_-8EwRsXMKgm53Tcg&s" alt="Logo">
+        </div>
+      
+        <div class="nav-links-wrapper">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+        </ul></div>
+    </nav>
+    <div class="container">
+        <h2>Feedback Form</h2>
+        <form id="feedbackForm">
+            <label for="name">Your Name (Optional):</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+
+            <label for="comment">Your Comment:</label>
+            <textarea id="comment" name="comment" rows="4" placeholder="Write your comment here..." required></textarea>
+
+            <input type="submit" value="Submit Feedback">
+        </form>
+        <div class="message" id="responseMessage"></div>
+    </div>
+    <script> $(document).ready(function() {
+        $('#feedbackForm').on('submit', function(event) {
+            event.preventDefault(); 
+            
+            var name = $('#name').val();
+            var comment = $('#comment').val();
+            var responseMessage = $('#responseMessage');
+                        responseMessage.removeClass('error success').html('');
+
+            if (!comment) {
+                responseMessage.addClass('error').html('Please enter a comment before submitting.');
+            } else {
+                responseMessage.addClass('success').html(
+                    '<p>Thank you for your feedback, ' + (name || 'User') + '!</p><p>Your comment: "' + comment + '" has been received. We appreciate your thoughts!</p>'
+                );
+
+                $('#feedbackForm')[0].reset();
+            }
+        });
+    });</script>
+</body>
+</html>
